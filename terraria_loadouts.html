@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terraria Loadout Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: rgba(13, 17, 23, 0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ff6b9d, #c44569, #f8b500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            text-shadow: none;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #8b949e;
+            font-weight: 400;
+        }
+
+        .progression-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .nav-separator {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(120, 219, 255, 0.5), rgba(255, 107, 157, 0.5), transparent);
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .nav-separator::before {
+            content: '⚡';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #0d1117;
+            padding: 0 15px;
+            color: #78dbff;
+            font-size: 1.2em;
+        }
+
+        .progression-btn {
+            padding: 12px 20px;
+            background: rgba(21, 32, 43, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #e6edf3;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.95em;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progression-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .progression-btn:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: #ff6b9d;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.2);
+        }
+
+        .progression-btn:hover::before {
+            left: 100%;
+        }
+
+        .progression-btn.active {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            border-color: #ff6b9d;
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+        }
+
+        .build-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .category-btn {
+            padding: 15px 25px;
+            background: rgba(13, 17, 23, 0.8);
+            border: 2px solid rgba(120, 219, 255, 0.3);
+            border-radius: 15px;
+            color: #78dbff;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            font-size: 0.95em;
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(120, 219, 255, 0.1), rgba(255, 107, 157, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .category-btn:hover {
+            border-color: #78dbff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(120, 219, 255, 0.2);
+        }
+
+        .category-btn:hover::before {
+            opacity: 1;
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, #78dbff, #4facfe);
+            color: #0d1117;
+            border-color: #78dbff;
+            box-shadow: 0 10px 30px rgba(120, 219, 255, 0.4);
+        }
+
+        .loadout-section {
+            display: none;
+            background: rgba(13, 17, 23, 0.8);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .loadout-section.active {
+            display: block;
+            animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        h2 {
+            background: linear-gradient(135deg, #ff6b9d, #c44569, #f8b500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        h3 {
+            color: #f8b500;
+            margin: 20px 0 15px 0;
+            font-size: 1.4em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .build-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .build-card {
+            background: rgba(21, 32, 43, 0.6);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .build-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b9d, #78dbff, #f8b500);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .build-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .build-card:hover::before {
+            opacity: 1;
+        }
+
+        .item-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .item-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.2s ease;
+        }
+
+        .item-list li:last-child {
+            border-bottom: none;
+        }
+
+        .item-list li:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding-left: 10px;
+        }
+
+        .item-name {
+            color: #78dbff;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .item-description {
+            color: #8b949e;
+            font-size: 0.9em;
+            margin-left: 10px;
+            font-weight: 400;
+        }
+
+        .stats-highlight {
+            background: linear-gradient(135deg, rgba(120, 219, 255, 0.1), rgba(255, 107, 157, 0.1));
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 4px solid #78dbff;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(120, 219, 255, 0.2);
+        }
+
+        .stats-highlight strong {
+            color: #ff6b9d;
+            font-weight: 600;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px 20px;
+            color: #8b949e;
+            font-size: 0.95em;
+            background: rgba(13, 17, 23, 0.6);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .progression-nav, .build-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .build-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            header {
+                padding: 30px 15px;
+            }
+            
+            .loadout-section {
+                padding: 25px 20px;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(13, 17, 23, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ff6b9d, #78dbff);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #c44569, #4facfe);
+        }
+
+        /* Loading animation for smooth transitions */
+        .loading {
+            opacity: 0.5;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Enhance emoji styling */
+        .category-btn {
+            font-size: 1em;
+        }
+
+        /* Add subtle glow effects */
+        .progression-btn.active,
+        .category-btn.active {
+            box-shadow: 
+                0 0 20px rgba(255, 107, 157, 0.3),
+                0 8px 25px rgba(255, 107, 157, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚔️ Terraria Ultimate Loadouts</h1>
+            <p class="subtitle">Professional builds & progression guide for every playstyle</p>
+        </header>
+
+        <div class="progression-nav">
+            <button class="progression-btn active" data-stage="early">Early Game</button>
+            <button class="progression-btn" data-stage="pre-wof">Pre-Wall of Flesh</button>
+            <button class="progression-btn" data-stage="post-wof">Post-Wall of Flesh</button>
+            <button class="progression-btn" data-stage="pre-mech">Pre-Mech Bosses</button>
+            <button class="progression-btn" data-stage="post-mech">Post-Mech Bosses</button>
+            <button class="progression-btn" data-stage="pre-golem">Pre-Golem</button>
+            <button class="progression-btn" data-stage="post-golem">Post-Golem</button>
+            <button class="progression-btn" data-stage="pre-moonlord">Pre-Moon Lord</button>
+            <button class="progression-btn" data-stage="endgame">Endgame</button>
+        </div>
+
+        <div class="nav-separator"></div>
+
+        <div class="build-categories">
+            <button class="category-btn active" data-category="melee">⚔️ Melee</button>
+            <button class="category-btn" data-category="ranged">🏹 Ranged</button>
+            <button class="category-btn" data-category="magic">🔮 Magic</button>
+            <button class="category-btn" data-category="summoner">👻 Summoner</button>
+            <button class="category-btn" data-category="builder">🏗️ Builder</button>
+            <button class="category-btn" data-category="speed">⚡ Max Speed</button>
+            <button class="category-btn" data-category="damage">💥 Max Damage</button>
+            <button class="category-btn" data-category="defense">🛡️ Max Defense</button>
+        </div>
+
+        <!-- Early Game Section -->
+        <div class="loadout-section active" id="early-melee">
+            <h2>Early Game - Melee Build</h2>
+            <div class="build-grid">
+                <div class="build-card">
+                    <h3>🗡️ Weapons</h3>
+                    <ul class="item-list">
+                        <li><span class="item-name">Copper/Tin Shortsword</span> <span class="item-description">Starting weapon</span></li>
+                        <li><span class="item-name">Wooden Sword</span> <span class="item-description">Crafted upgrade</span></li>
+                        <li><span class="item-name">Cactus Sword</span> <span class="item-description">Desert biome</span></li>
+                        <li><span class="item-name">Enchanted Sword</span> <span class="item-description">Rare world gen</span></li>
+                    </ul>
+                </div>
+                <div class="build-card">
+                    <h3>🛡️ Armor</h3>
+                    <ul class="item-list">
+                        <li><span class="item-name">Copper/Tin Armor</span> <span class="item-description">First armor set</span></li>
+                        <li><span class="item-name">Iron/Lead Armor</span> <span class="item-description">Early game upgrade</span></li>
+                        <li><span class="item-name">Silver/Tungsten Armor</span> <span class="item-description">Better defense</span></li>
+                    </ul>
+                </div>
+                <div class="build-card">
+                    <h3>💍 Accessories</h3>
+                    <ul class="item-list">
+                        <li><span class="item-name">Hermes Boots</span> <span class="item-description">Underground chests</span></li>
+                        <li><span class="item-name">Climbing Claws</span> <span class="item-description">Surface chests</span></li>
+                        <li><span class="item-name">Shiny Red Balloon</span> <span class="item-description">Sky islands</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="stats-highlight">
+                <strong>Key Stats:</strong> Focus on basic mobility and survivability. Prioritize finding Hermes Boots and basic armor.
+            </div>
+        </div>
+
+        <!-- Add more sections for each combination -->
+        <div class="loadout-section" id="early-ranged">
+            <h2>Early Game - Ranged Build</h2>
+            <div class="build-grid">
+                <div class="build-card">
+                    <h3>🏹 Weapons</h3>
+                    <ul class="item-list">
+                        <li><span class="item-name">Wooden Bow</span> <span class="item-description">Crafted starter</span></li>
+                        <li><span class="item-name">Boreal Wood Bow</span> <span class="item-description">Snow biome</span></li>
+                        <li><span class="item-name">Demon Bow</span> <span class="item-description">Shadow Orbs</span></li>
+                        <li><span class="item-name">The Undertaker</span> <span class="item-description">Crimson Hearts</span></li>
+                    </ul>
+                </div>
+                <div class="build-card">
+                    <h3>🛡️ Armor</h3>
+                    <ul class="item-list">
+                        <li><span class="item-name">Fossil Armor</span> <span class="item-description">Underground Desert</span></li>
+                        <li><span class="item-name">Necro Armor</span> <span class="item-description">Dungeon bones</span></li>
+                    </ul>
+                </div>
+                <div class="build-card">
+                    <h3>🎯 Ammunition</h3>
+                    <ul class="item-list">
+                        <li><span class="item-name">Wooden Arrows</span> <span class="item-description">Basic ammo</span></li>
+                        <li><span class="item-name">Flaming Arrows</span> <span class="item-description">Crafted upgrade</span></li>
+                        <li><span class="item-name">Musket Balls</span> <span class="item-description">Gun ammo</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Builder Build -->
+        <div class="loadout-section" id="early-builder">
+            <h2>Early Game - Builder Build</h2>
+            <div class="build-grid">
+                <div class="build-card">
+                    <h3>🔨 Tools</h3>
+                    <ul class="item-list">
+                        <li><span class="item-name">Copper Pickaxe</span> <span class="item-description">Starting tool</span></li>
+                        <li><span class="item-name">Iron/Lead Pickaxe</span> <span class="item-description">Mine most ores</span></li>
+                        <li><span class="item-name">Gold/Platinum Pickaxe</span> <span class="item-description">Better mining</span></li>
+                        <li><span class="item-name">Ruler</span> <span class="item-description">Measurement tool</span></li>
+                    </ul>
+                </div>
+                <div class="build-card">
+                    <h3>🏗️ Utility</h3>
+                    <ul class="item-list">
+                        <li><span class="item-name">Rope</span> <span class="item-description">Vertical movement</span></li>
+                        <li><span class="item-name">Platforms</span> <span class="item-description">Building material</span></li>
+                        <li><span class="item-name">Torches</span> <span class="item-description">Lighting</span></li>
+                        <li><span class="item-name">Grappling Hook</span> <span class="item-description">From Skeletron</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎮 Deploy this guide to Vercel with GitHub integration for seamless updates and sharing!</p>
+            <p style="margin-top: 10px; color: #6b7280;">Built with modern web standards • Optimized for all devices • Always up-to-date</p>
+        </div>
+    </div>
+
+    <script>
+        const progressionData = {
+            early: {
+                melee: {
+                    title: "Early Game - Melee Build",
+                    weapons: [
+                        { name: "Copper/Tin Shortsword", desc: "Starting weapon" },
+                        { name: "Wooden Sword", desc: "Crafted upgrade" },
+                        { name: "Cactus Sword", desc: "Desert biome" },
+                        { name: "Enchanted Sword", desc: "Rare world gen" }
+                    ],
+                    armor: [
+                        { name: "Copper/Tin Armor", desc: "First armor set" },
+                        { name: "Iron/Lead Armor", desc: "Early game upgrade" },
+                        { name: "Silver/Tungsten Armor", desc: "Better defense" }
+                    ],
+                    accessories: [
+                        { name: "Hermes Boots", desc: "Underground chests" },
+                        { name: "Climbing Claws", desc: "Surface chests" },
+                        { name: "Shiny Red Balloon", desc: "Sky islands" }
+                    ],
+                    stats: "Focus on basic mobility and survivability. Prioritize finding Hermes Boots and basic armor."
+                },
+                ranged: {
+                    title: "Early Game - Ranged Build",
+                    weapons: [
+                        { name: "Wooden Bow", desc: "Crafted starter" },
+                        { name: "Boreal Wood Bow", desc: "Snow biome" },
+                        { name: "Demon Bow", desc: "Shadow Orbs" },
+                        { name: "The Undertaker", desc: "Crimson Hearts" }
+                    ],
+                    armor: [
+                        { name: "Fossil Armor", desc: "Underground Desert" },
+                        { name: "Necro Armor", desc: "Dungeon bones" }
+                    ],
+                    accessories: [
+                        { name: "Wooden Arrows", desc: "Basic ammo" },
+                        { name: "Flaming Arrows", desc: "Crafted upgrade" },
+                        { name: "Musket Balls", desc: "Gun ammo" }
+                    ],
+                    stats: "Focus on ranged damage and ammo efficiency."
+                },
+                magic: {
+                    title: "Early Game - Magic Build",
+                    weapons: [
+                        { name: "Wand of Sparking", desc: "Found in chests" },
+                        { name: "Amethyst Staff", desc: "Crafted gem staff" },
+                        { name: "Vilethorn", desc: "Shadow Orbs" },
+                        { name: "Water Bolt", desc: "Dungeon shelves" }
+                    ],
+                    armor: [
+                        { name: "Gem Robes", desc: "Crafted from gems" },
+                        { name: "Jungle Armor", desc: "Jungle Spores + Stingers" }
+                    ],
+                    accessories: [
+                        { name: "Band of Regeneration", desc: "Health regen" },
+                        { name: "Mana Crystal", desc: "Increase max mana" },
+                        { name: "Nature's Gift", desc: "Reduce mana usage" }
+                    ],
+                    stats: "Focus on mana management and spell damage."
+                },
+                summoner: {
+                    title: "Early Game - Summoner Build",
+                    weapons: [
+                        { name: "Slime Staff", desc: "Extremely rare drop" },
+                        { name: "Finch Staff", desc: "Living Wood Chests" },
+                        { name: "Abigail's Flower", desc: "Don't Starve crossover" }
+                    ],
+                    armor: [
+                        { name: "Flinx Fur Coat", desc: "Snow biome" },
+                        { name: "Bee Armor", desc: "Bee Wax from Queen Bee" }
+                    ],
+                    accessories: [
+                        { name: "Pygmy Necklace", desc: "+1 minion slot" },
+                        { name: "Feral Claws", desc: "Melee backup" }
+                    ],
+                    stats: "Very limited early game. Focus on finding any summon weapon."
+                },
+                builder: {
+                    title: "Early Game - Builder Build",
+                    weapons: [
+                        { name: "Copper Pickaxe", desc: "Starting tool" },
+                        { name: "Iron/Lead Pickaxe", desc: "Mine most ores" },
+                        { name: "Gold/Platinum Pickaxe", desc: "Better mining" },
+                        { name: "Ruler", desc: "Measurement tool" }
+                    ],
+                    armor: [
+                        { name: "Mining Armor", desc: "Any basic armor for protection" }
+                    ],
+                    accessories: [
+                        { name: "Rope", desc: "Vertical movement" },
+                        { name: "Platforms", desc: "Building material" },
+                        { name: "Torches", desc: "Lighting" },
+                        { name: "Grappling Hook", desc: "From Skeletron" }
+                    ],
+                    stats: "Focus on mobility and building materials."
+                },
+                speed: {
+                    title: "Early Game - Max Speed Build",
+                    weapons: [
+                        { name: "Any Light Weapon", desc: "For mobility" }
+                    ],
+                    armor: [
+                        { name: "Light Armor", desc: "Minimize weight" }
+                    ],
+                    accessories: [
+                        { name: "Hermes Boots", desc: "Essential for speed" },
+                        { name: "Aglet", desc: "+5% movement speed" },
+                        { name: "Anklet of the Wind", desc: "+10% movement speed" },
+                        { name: "Swiftness Potion", desc: "+25% movement speed" }
+                    ],
+                    stats: "Stack movement speed bonuses. Hermes Boots are crucial."
+                },
+                damage: {
+                    title: "Early Game - Max Damage Build",
+                    weapons: [
+                        { name: "Enchanted Sword", desc: "High damage if found" },
+                        { name: "Starfury", desc: "Sky islands" },
+                        { name: "Blade of Grass", desc: "Jungle materials" }
+                    ],
+                    armor: [
+                        { name: "Shadow/Crimson Armor", desc: "Damage bonuses" }
+                    ],
+                    accessories: [
+                        { name: "Feral Claws", desc: "Melee speed" },
+                        { name: "Shark Tooth Necklace", desc: "Armor penetration" },
+                        { name: "Rage Potion", desc: "+10% damage" }
+                    ],
+                    stats: "Focus on damage-boosting accessories and high-tier weapons."
+                },
+                defense: {
+                    title: "Early Game - Max Defense Build",
+                    weapons: [
+                        { name: "Any Viable Weapon", desc: "Secondary priority" }
+                    ],
+                    armor: [
+                        { name: "Gold/Platinum Armor", desc: "Highest early defense" },
+                        { name: "Molten Armor", desc: "If accessible" }
+                    ],
+                    accessories: [
+                        { name: "Band of Regeneration", desc: "Health regen" },
+                        { name: "Obsidian Skin Potion", desc: "Lava immunity" },
+                        { name: "Ironskin Potion", desc: "+8 defense" },
+                        { name: "Shackle", desc: "+1 defense" }
+                    ],
+                    stats: "Maximize defense stat and health regeneration."
+                }
+            },
+            'pre-wof': {
+                melee: {
+                    title: "Pre-Wall of Flesh - Melee Build",
+                    weapons: [
+                        { name: "Night's Edge", desc: "Powerful pre-Hardmode sword" },
+                        { name: "Blade of Grass", desc: "Jungle sword" },
+                        { name: "Muramasa", desc: "Dungeon sword" },
+                        { name: "Sunfury", desc: "Underworld flail" }
+                    ],
+                    armor: [
+                        { name: "Molten Armor", desc: "Best pre-Hardmode melee" },
+                        { name: "Shadow/Crimson Armor", desc: "Alternative option" }
+                    ],
+                    accessories: [
+                        { name: "Feral Claws", desc: "Melee speed" },
+                        { name: "Obsidian Shield", desc: "Knockback immunity + fire immunity" },
+                        { name: "Lightning Boots", desc: "Speed upgrade" },
+                        { name: "Band of Regeneration", desc: "Health regen" }
+                    ],
+                    stats: "High melee damage and survivability for Wall of Flesh fight."
+                },
+                ranged: {
+                    title: "Pre-Wall of Flesh - Ranged Build",
+                    weapons: [
+                        { name: "Phoenix Blaster", desc: "Handgun + Meteorite Bars" },
+                        { name: "Hellwing Bow", desc: "Bat wings, piercing shots" },
+                        { name: "Molten Fury", desc: "Hellstone bow" },
+                        { name: "Star Cannon", desc: "Extremely powerful but expensive" }
+                    ],
+                    armor: [
+                        { name: "Necro Armor", desc: "Ranged damage bonus" },
+                        { name: "Fossil Armor", desc: "Alternative ranged set" }
+                    ],
+                    accessories: [
+                        { name: "Ranger Emblem", desc: "Ranged damage (if obtained)" },
+                        { name: "Obsidian Shield", desc: "Knockback immunity" },
+                        { name: "Lightning Boots", desc: "Mobility" },
+                        { name: "Shark Tooth Necklace", desc: "Armor penetration" }
+                    ],
+                    stats: "Focus on consistent ranged DPS for Wall of Flesh."
+                },
+                magic: {
+                    title: "Pre-Wall of Flesh - Magic Build",
+                    weapons: [
+                        { name: "Demon Scythe", desc: "Demon drops, piercing" },
+                        { name: "Water Bolt", desc: "Bouncing projectiles" },
+                        { name: "Flamelash", desc: "Controllable fire" },
+                        { name: "Flower of Fire", desc: "Nature's Gift + Jungle Rose" }
+                    ],
+                    armor: [
+                        { name: "Jungle Armor", desc: "Mana cost reduction" },
+                        { name: "Meteor Armor", desc: "Magic damage + meteor shot synergy" }
+                    ],
+                    accessories: [
+                        { name: "Celestial Cuffs", desc: "Mana + magic damage" },
+                        { name: "Band of Starpower", desc: "Increased mana" },
+                        { name: "Nature's Gift", desc: "Reduced mana usage" },
+                        { name: "Lightning Boots", desc: "Mobility" }
+                    ],
+                    stats: "Mana efficiency and magic damage for sustained DPS."
+                },
+                summoner: {
+                    title: "Pre-Wall of Flesh - Summoner Build",
+                    weapons: [
+                        { name: "Imp Staff", desc: "Hellstone + Obsidian" },
+                        { name: "Bee Keeper", desc: "Queen Bee drop" },
+                        { name: "Hornet Staff", desc: "Queen Bee drop" }
+                    ],
+                    armor: [
+                        { name: "Bee Armor", desc: "Best pre-Hardmode summoner" }
+                    ],
+                    accessories: [
+                        { name: "Pygmy Necklace", desc: "+1 minion slot" },
+                        { name: "Feral Claws", desc: "Whip speed" },
+                        { name: "Lightning Boots", desc: "Mobility" },
+                        { name: "Obsidian Shield", desc: "Defense" }
+                    ],
+                    stats: "Limited options but Imp Staff is viable for Wall of Flesh."
+                }
+            },
+            endgame: {
+                melee: {
+                    title: "Endgame - Melee Build",
+                    weapons: [
+                        { name: "Zenith", desc: "Ultimate sword, crafted from many swords" },
+                        { name: "Meowmere", desc: "Moon Lord drop" },
+                        { name: "Star Wrath", desc: "Moon Lord drop" },
+                        { name: "Solar Eruption", desc: "Solar Fragments" }
+                    ],
+                    armor: [
+                        { name: "Solar Flare Armor", desc: "Ultimate melee armor" }
+                    ],
+                    accessories: [
+                        { name: "Celestial Shell", desc: "All-around stats" },
+                        { name: "Fire Gauntlet", desc: "Melee bonuses" },
+                        { name: "Destroyer Emblem", desc: "Damage + crit" },
+                        { name: "Warrior Emblem", desc: "Melee damage" },
+                        { name: "Ankh Shield", desc: "Immunity + defense" }
+                    ],
+                    stats: "Maximum melee damage and survivability. Zenith is the strongest weapon."
+                },
+                builder: {
+                    title: "Endgame - Ultimate Builder Build",
+                    weapons: [
+                        { name: "Drill Containment Unit", desc: "Ultimate mining tool, infinite reach" },
+                        { name: "Architect Gizmo Pack", desc: "All building tools combined" },
+                        { name: "Grand Design", desc: "Advanced wiring tool" }
+                    ],
+                    armor: [
+                        { name: "Solar Flare Armor", desc: "High defense while building" },
+                        { name: "Vortex Armor", desc: "Stealth for safe building" }
+                    ],
+                    accessories: [
+                        { name: "Master Ninja Gear", desc: "Dash + dodge + climb" },
+                        { name: "Celestial Shell", desc: "All-around bonuses" },
+                        { name: "Ankh Shield", desc: "Immunity from debuffs" },
+                        { name: "Terraspark Boots", desc: "Ultimate movement" },
+                        { name: "Rod of Discord", desc: "Instant teleportation" }
+                    ],
+                    stats: "Maximum placement speed, reach, and mobility. Builder Potions essential."
+                },
+                speed: {
+                    title: "Endgame - Maximum Speed Build",
+                    weapons: [
+                        { name: "Any Light Weapon", desc: "Minimal impact on speed" }
+                    ],
+                    armor: [
+                        { name: "Vortex Armor", desc: "Stealth + mobility" },
+                        { name: "Chlorophyte Armor", desc: "Good mobility option" }
+                    ],
+                    accessories: [
+                        { name: "Terraspark Boots", desc: "Ultimate boots" },
+                        { name: "Master Ninja Gear", desc: "Dash ability" },
+                        { name: "Rod of Discord", desc: "Instant teleportation" },
+                        { name: "Wings (Any Tier 3+)", desc: "Flight capability" },
+                        { name: "Bundle of Balloons", desc: "Multiple jumps" }
+                    ],
+                    stats: "Maximum movement speed, flight time, and mobility options."
+                },
+                damage: {
+                    title: "Endgame - Maximum Damage Build",
+                    weapons: [
+                        { name: "S.D.M.G.", desc: "Highest DPS ranged weapon" },
+                        { name: "Last Prism", desc: "Highest magic DPS" },
+                        { name: "Zenith", desc: "Highest melee DPS" },
+                        { name: "Stardust Dragon Staff", desc: "Highest summon DPS" }
+                    ],
+                    armor: [
+                        { name: "Class-appropriate Lunar Armor", desc: "Damage bonuses" }
+                    ],
+                    accessories: [
+                        { name: "Destroyer Emblem", desc: "12% damage + 8% crit" },
+                        { name: "Avenger Emblem", desc: "12% damage" },
+                        { name: "Celestial Emblem", desc: "15% magic damage + mana" },
+                        { name: "Papyrus Scarab", desc: "+1 minion slot + damage" },
+                        { name: "Ranger Emblem", desc: "15% ranged damage" }
+                    ],
+                    stats: "Stack all damage-boosting accessories and use damage potions."
+                }
+            }
+        };
+
+        // Get DOM elements
+        const progressionBtns = document.querySelectorAll('.progression-btn');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const loadoutSections = document.querySelectorAll('.loadout-section');
+
+        let currentStage = 'early';
+        let currentCategory = 'melee';
+
+        // Event listeners
+        progressionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                progressionBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentStage = btn.dataset.stage;
+                updateDisplay();
+            });
+        });
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.dataset.category;
+                updateDisplay();
+            });
+        });
+
+        function updateDisplay() {
+            // Hide all sections
+            loadoutSections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Get current data
+            const stageData = progressionData[currentStage];
+            const buildData = stageData && stageData[currentCategory];
+
+            if (buildData) {
+                // Show the first section and update its content
+                const activeSection = document.querySelector('.loadout-section');
+                activeSection.classList.add('active');
+                
+                // Update content
+                activeSection.innerHTML = generateBuildHTML(buildData);
+            }
+        }
+
+        function generateBuildHTML(data) {
+            let html = `<h2>${data.title}</h2><div class="build-grid">`;
+
+            // Weapons section
+            if (data.weapons && data.weapons.length > 0) {
+                html += `<div class="build-card">
+                    <h3>⚔️ Weapons</h3>
+                    <ul class="item-list">`;
+                data.weapons.forEach(weapon => {
+                    html += `<li><span class="item-name">${weapon.name}</span> <span class="item-description">${weapon.desc}</span></li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            // Armor section
+            if (data.armor && data.armor.length > 0) {
+                html += `<div class="build-card">
+                    <h3>🛡️ Armor</h3>
+                    <ul class="item-list">`;
+                data.armor.forEach(armor => {
+                    html += `<li><span class="item-name">${armor.name}</span> <span class="item-description">${armor.desc}</span></li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            // Accessories section
+            if (data.accessories && data.accessories.length > 0) {
+                html += `<div class="build-card">
+                    <h3>💍 Accessories</h3>
+                    <ul class="item-list">`;
+                data.accessories.forEach(accessory => {
+                    html += `<li><span class="item-name">${accessory.name}</span> <span class="item-description">${accessory.desc}</span></li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            html += `</div>`;
+
+            // Stats highlight
+            if (data.stats) {
+                html += `<div class="stats-highlight">
+                    <strong>Key Stats:</strong> ${data.stats}
+                </div>`;
+            }
+
+            return html;
+        }
+
+        // Initialize display
+        updateDisplay();
+
+        // Add more complete progression data
+        Object.assign(progressionData, {
+            'post-wof': {
+                melee: {
+                    title: "Post-Wall of Flesh - Melee Build",
+                    weapons: [
+                        { name: "Cobalt/Palladium Sword", desc: "First Hardmode melee" },
+                        { name: "Mythril/Orichalcum Sword", desc: "Mid-tier Hardmode" },
+                        { name: "Adamantite/Titanium Sword", desc: "High-tier Hardmode" },
+                        { name: "Excalibur", desc: "Hallowed Bars" }
+                    ],
+                    armor: [
+                        { name: "Cobalt/Palladium Armor", desc: "First Hardmode armor" },
+                        { name: "Mythril/Orichalcum Armor", desc: "Mid-tier upgrade" },
+                        { name: "Adamantite/Titanium Armor", desc: "Pre-mech boss armor" }
+                    ],
+                    accessories: [
+                        { name: "Warrior Emblem", desc: "Wall of Flesh drop" },
+                        { name: "Avenger Emblem", desc: "Upgrade from Warrior" },
+                        { name: "Wings", desc: "Essential for mobility" },
+                        { name: "Cross Necklace", desc: "Invincibility frames" }
+                    ],
+                    stats: "Prepare for mechanical bosses with Hardmode ore equipment."
+                },
+                ranged: {
+                    title: "Post-Wall of Flesh - Ranged Build",
+                    weapons: [
+                        { name: "Cobalt Repeater", desc: "Cobalt + String" },
+                        { name: "Mythril Repeater", desc: "Mythril + String" },
+                        { name: "Adamantite Repeater", desc: "Adamantite + String" },
+                        { name: "Clockwork Assault Rifle", desc: "Wall of Flesh drop" }
+                    ],
+                    armor: [
+                        { name: "Hardmode Ore Armor", desc: "Cobalt/Mythril/Adamantite sets" }
+                    ],
+                    accessories: [
+                        { name: "Ranger Emblem", desc: "Wall of Flesh drop" },
+                        { name: "Magic Quiver", desc: "Ranged bonuses" },
+                        { name: "Wings", desc: "Flight capability" },
+                        { name: "Shark Tooth Necklace", desc: "Armor penetration" }
+                    ],
+                    stats: "Focus on high-damage repeaters and proper ammunition."
+                }
+            },
+            'pre-mech': {
+                melee: {
+                    title: "Pre-Mechanical Bosses - Melee Build",
+                    weapons: [
+                        { name: "Excalibur", desc: "Hallowed Bars sword" },
+                        { name: "Adamantite/Titanium Sword", desc: "High-tier ore sword" },
+                        { name: "Light Discs", desc: "Hallowed Bars thrown" },
+                        { name: "Amarok", desc: "Snow biome yoyo" }
+                    ],
+                    armor: [
+                        { name: "Adamantite Armor", desc: "Melee set bonus" },
+                        { name: "Titanium Armor", desc: "Shadow dodge ability" },
+                        { name: "Frost Armor", desc: "Frost Core armor" }
+                    ],
+                    accessories: [
+                        { name: "Warrior Emblem", desc: "15% melee damage" },
+                        { name: "Mechanical Glove", desc: "Melee bonuses" },
+                        { name: "Wings", desc: "Any wings for flight" },
+                        { name: "Ankh Shield", desc: "Immunity + defense" },
+                        { name: "Cross Necklace", desc: "Longer invincibility" }
+                    ],
+                    stats: "Prepare for the three mechanical bosses with maximum melee effectiveness."
+                }
+            },
+            'post-mech': {
+                melee: {
+                    title: "Post-Mechanical Bosses - Melee Build",
+                    weapons: [
+                        { name: "Terra Blade", desc: "Excalibur + True Excalibur" },
+                        { name: "True Excalibur", desc: "Broken Hero Sword + Excalibur" },
+                        { name: "Death Sickle", desc: "Reaper drops during Eclipse" },
+                        { name: "Keybrand", desc: "Plantera key mold weapon" }
+                    ],
+                    armor: [
+                        { name: "Hallowed Armor", desc: "Hallowed Bars from mech bosses" },
+                        { name: "Chlorophyte Armor", desc: "Jungle armor upgrade" }
+                    ],
+                    accessories: [
+                        { name: "Fire Gauntlet", desc: "Ultimate melee accessory" },
+                        { name: "Destroyer Emblem", desc: "Avenger + Eye of Golem" },
+                        { name: "Ankh Shield", desc: "Complete immunity shield" },
+                        { name: "Wings (Leaf/Flame)", desc: "Higher tier wings" },
+                        { name: "Cross Necklace", desc: "Extended invincibility" }
+                    ],
+                    stats: "High-tier Hardmode equipment for Plantera and Golem preparation."
+                }
+            },
+            'pre-golem': {
+                melee: {
+                    title: "Pre-Golem - Melee Build",
+                    weapons: [
+                        { name: "Terra Blade", desc: "Projectile sword" },
+                        { name: "Death Sickle", desc: "Eclipse weapon" },
+                        { name: "Vampire Knives", desc: "Crimson Key weapon" },
+                        { name: "Scourge of the Corruptor", desc: "Corruption Key weapon" }
+                    ],
+                    armor: [
+                        { name: "Chlorophyte Armor", desc: "Jungle's strongest armor" },
+                        { name: "Turtle Armor", desc: "Tank-focused melee set" }
+                    ],
+                    accessories: [
+                        { name: "Fire Gauntlet", desc: "Melee speed + damage" },
+                        { name: "Destroyer Emblem", desc: "Damage + crit chance" },
+                        { name: "Ankh Shield", desc: "Complete debuff immunity" },
+                        { name: "Leaf Wings", desc: "Good flight capability" },
+                        { name: "Star Veil", desc: "Mana stars + invincibility" }
+                    ],
+                    stats: "Optimized for Plantera fight and Golem preparation."
+                }
+            },
+            'post-golem': {
+                melee: {
+                    title: "Post-Golem - Melee Build",
+                    weapons: [
+                        { name: "Terra Blade", desc: "Still viable post-Golem" },
+                        { name: "Influx Waver", desc: "Martian Madness sword" },
+                        { name: "The Horseman's Blade", desc: "Pumpkin Moon weapon" },
+                        { name: "North Pole", desc: "Frost Moon weapon" }
+                    ],
+                    armor: [
+                        { name: "Beetle Armor", desc: "Golem drops upgrade" },
+                        { name: "Spectre Armor", desc: "For magic builds transitioning" }
+                    ],
+                    accessories: [
+                        { name: "Fire Gauntlet", desc: "Ultimate melee accessory" },
+                        { name: "Destroyer Emblem", desc: "High damage bonus" },
+                        { name: "Ankh Shield", desc: "Defense + immunity" },
+                        { name: "Fishron Wings", desc: "High-tier flight" },
+                        { name: "Celestial Shell", desc: "Werewolf + Merfolk bonuses" }
+                    ],
+                    stats: "Preparation for Lunar Events and Moon Lord."
+                }
+            },
+            'pre-moonlord': {
+                melee: {
+                    title: "Pre-Moon Lord - Melee Build",
+                    weapons: [
+                        { name: "Solar Eruption", desc: "Solar Fragment flail" },
+                        { name: "Daybreak", desc: "Solar Fragment spear" },
+                        { name: "Meowmere", desc: "Moon Lord preparation" },
+                        { name: "Influx Waver", desc: "Martian invasion sword" }
+                    ],
+                    armor: [
+                        { name: "Solar Flare Armor", desc: "Lunar Event armor" },
+                        { name: "Beetle Armor", desc: "Alternative tank option" }
+                    ],
+                    accessories: [
+                        { name: "Fire Gauntlet", desc: "Melee bonuses" },
+                        { name: "Destroyer Emblem", desc: "Damage + crit" },
+                        { name: "Ankh Shield", desc: "Defense" },
+                        { name: "Fishron Wings", desc: "Flight" },
+                        { name: "Celestial Shell", desc: "Multiple bonuses" }
+                    ],
+                    stats: "Maximum preparation for the Moon Lord fight."
+                }
+            }
+        });
+
+        // Add missing categories for all stages
+        const stages = ['early', 'pre-wof', 'post-wof', 'pre-mech', 'post-mech', 'pre-golem', 'post-golem', 'pre-moonlord', 'endgame'];
+        const categories = ['melee', 'ranged', 'magic', 'summoner', 'builder', 'speed', 'damage', 'defense'];
+
+        stages.forEach(stage => {
+            if (!progressionData[stage]) {
+                progressionData[stage] = {};
+            }
+            
+            categories.forEach(category => {
+                if (!progressionData[stage][category]) {
+                    progressionData[stage][category] = {
+                        title: `${stage.charAt(0).toUpperCase() + stage.slice(1)} - ${category.charAt(0).toUpperCase() + category.slice(1)} Build`,
+                        weapons: [{ name: "Coming Soon", desc: "This build is being updated" }],
+                        armor: [{ name: "Coming Soon", desc: "This build is being updated" }],
+                        accessories: [{ name: "Coming Soon", desc: "This build is being updated" }],
+                        stats: "This progression stage is being updated with complete information."
+                    };
+                }
+            });
+        });
+    </script>
+</body>
+</html>
