@@ -1,0 +1,43 @@
+{
+  "name": "terraria-loadout-guide",
+  "version": "1.0.0",
+  "description": "Complete Terraria loadout guide with progression builds for every playstyle",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "serve . -l 3000",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "surge . --domain terraria-loadouts.surge.sh",
+    "preview": "serve . -s"
+  },
+  "keywords": [
+    "terraria",
+    "loadouts",
+    "builds",
+    "gaming",
+    "guide",
+    "progression",
+    "melee",
+    "ranged",
+    "magic",
+    "summoner"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/terraria-loadout-guide.git"
+  },
+  "homepage": "https://yourusername.github.io/terraria-loadout-guide/",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
